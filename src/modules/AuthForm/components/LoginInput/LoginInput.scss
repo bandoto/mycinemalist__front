@@ -1,0 +1,17 @@
+.form__input {
+  padding: 10px;
+  background-color: lightgray;
+  border-radius: 5px;
+  border: 1px solid gray;
+  width: 100%;
+}
+
+.form__label {
+  display: grid;
+  span {
+    margin-bottom: 5px;
+  }
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}

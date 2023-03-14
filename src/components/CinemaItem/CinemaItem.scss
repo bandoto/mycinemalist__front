@@ -1,0 +1,17 @@
+.item-cinema {
+  &__name {
+    font-weight: bold;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__description {
+  }
+  &__image {
+    margin-bottom: 10px;
+    img {
+      width: 100%;
+    }
+  }
+}
