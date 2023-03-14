@@ -5,6 +5,7 @@ import {getMe} from "./modules/AuthForm";
 import {useEffect} from "react";
 import AuthPage from "./pages/AuthPage/AuthPage";
 import CinemasPage from "./pages/CinemasPage/CinemasPage";
+import CinemaSingle from "./modules/CinemaList/components/CinemaSingle/CinemaSingle";
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path='/' element={<CinemasPage />}></Route>
                     <Route path='/login' element={<AuthPage />}></Route>
                     <Route path='/registration' element={<AuthPage />}></Route>
+                    <Route path='/cinema/:id' element={<CinemaSingle />}></Route>
                 </Routes>
             </main>
         </div>

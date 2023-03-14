@@ -5,11 +5,13 @@ import {Cinema, getAllCinemasProps} from "../models/cinemaModels";
 interface cinemasState {
     isLoading: boolean
     cinemas: Cinema[]
+    singleCinema: Cinema | null
 }
 
 const initialState: cinemasState = {
     isLoading: false,
-    cinemas: []
+    cinemas: [],
+    singleCinema: null
 }
 
 export const getAllCinemas = createAsyncThunk<Cinema[], getAllCinemasProps>(
@@ -17,6 +19,18 @@ export const getAllCinemas = createAsyncThunk<Cinema[], getAllCinemasProps>(
     async ({page, tag}) => {
         try {
             const { data } = await axios.get(`/cinemas?page=${page}&tag=${tag}`)
+            return data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
+export const getCinema = createAsyncThunk<Cinema, number>(
+    'cinemas/getCinema',
+    async (id) => {
+        try {
+            const { data } = await axios.get(`/cinemas/movieId/${id}`)
             return data
         } catch (e) {
             console.log(e)
@@ -40,6 +54,17 @@ export const cinemasSlice = createSlice({
                 state.cinemas = action.payload
             })
             .addCase(getAllCinemas.rejected, (state, action) => {
+                state.isLoading = false
+            })
+
+            .addCase(getCinema.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getCinema.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.singleCinema = action.payload
+            })
+            .addCase(getCinema.rejected, (state, action) => {
                 state.isLoading = false
             })
     }

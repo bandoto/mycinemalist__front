@@ -123,7 +123,6 @@ export const authSlice = createSlice({
 
             })
             .addCase(loginUser.rejected, (state, action) => {
-                console.log(action.payload?.message)
                 state.errors = action.payload?.message!
                 state.isLoading = false
             })
@@ -138,7 +137,6 @@ export const authSlice = createSlice({
                 state.token = action.payload.token
             })
             .addCase(getMe.rejected, (state, action) => {
-                console.log(action.payload?.message)
                 state.errors = action.payload?.message!
                 state.isLoading = false
             })
