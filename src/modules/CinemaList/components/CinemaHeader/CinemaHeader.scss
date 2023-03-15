@@ -1,0 +1,28 @@
+.header-cinemas {
+  flex: 0 0 250px;
+  &__menu {
+
+  }
+  &__title {
+    background-color: lightgray;
+    padding: 10px 5px;
+  }
+  &__sort {
+    border: 1px solid lightgray;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+  &__list {
+    padding: 10px 5px;
+    li {
+      display: block;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+    .active {
+      text-decoration: underline;
+    }
+  }
+}

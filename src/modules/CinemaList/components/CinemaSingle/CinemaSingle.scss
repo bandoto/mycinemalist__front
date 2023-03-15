@@ -1,0 +1,31 @@
+.cinema {
+  padding: 50px 0;
+  &__name {
+  }
+
+  &__body {
+    display: flex;
+  }
+
+  &__image {
+    max-width: 250px;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    margin-left: 20px;
+    span {
+      display: block;
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__description {
+    margin-top: 20px;
+  }
+}
