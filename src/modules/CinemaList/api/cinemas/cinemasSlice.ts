@@ -6,12 +6,18 @@ interface cinemasState {
     isLoading: boolean
     cinemas: Cinema[]
     singleCinema: Cinema | null
+    fetching: boolean
+    page: number
+    tag: string
 }
 
 const initialState: cinemasState = {
     isLoading: false,
     cinemas: [],
-    singleCinema: null
+    singleCinema: null,
+    fetching: true,
+    page: 1,
+    tag: 'popular'
 }
 
 export const getAllCinemas = createAsyncThunk<Cinema[], getAllCinemasProps>(
@@ -42,7 +48,15 @@ export const cinemasSlice = createSlice({
     name: 'cinemas',
     initialState,
     reducers: {
-
+        fetchingCinemas: (state) => {
+            state.fetching = true
+        },
+        setPage: (state, action) => {
+            state.page = action.payload
+        },
+        setTag: (state, action) => {
+            state.tag = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -51,7 +65,9 @@ export const cinemasSlice = createSlice({
             })
             .addCase(getAllCinemas.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.cinemas = action.payload
+                state.cinemas = [...state.cinemas, ...action.payload]
+                state.fetching = false
+                state.page = state.page + 1
             })
             .addCase(getAllCinemas.rejected, (state, action) => {
                 state.isLoading = false
@@ -70,5 +86,5 @@ export const cinemasSlice = createSlice({
     }
 })
 
-export const {} = cinemasSlice.actions;
+export const {fetchingCinemas} = cinemasSlice.actions;
 export default cinemasSlice.reducer;

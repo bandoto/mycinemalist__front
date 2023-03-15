@@ -1,22 +1,33 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Container} from "../../../../UI/Container/Container";
 
 import './CinemaList.scss'
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
-import {getAllCinemas} from "../../api/cinemas/cinemasSlice";
+import {fetchingCinemas, getAllCinemas} from "../../api/cinemas/cinemasSlice";
 import CinemaItem from "../../../../components/CinemaItem/CinemaItem";
 
 export const CinemaList = () => {
 
-    const [page, setPage] = useState(1)
-    const [tag, setTag] = useState('popular')
-
     const dispatch = useAppDispatch()
-    const {cinemas} = useAppSelector(state => state.cinemas)
+    const {cinemas, fetching, page, tag} = useAppSelector(state => state.cinemas)
 
     useEffect(() => {
-        dispatch(getAllCinemas({page: page, tag: tag}))
-    }, [page, tag])
+        if (fetching) {
+            dispatch(getAllCinemas({page, tag}))
+        }
+    }, [fetching])
+
+    useEffect(() => {
+        document.addEventListener('scroll', scrollHandler)
+        return () => document.removeEventListener('scroll', scrollHandler)
+    }, [])
+
+    const scrollHandler: EventListener = (e: Event) => {
+        const target = e.currentTarget as Document;
+        if (target.documentElement.scrollHeight - (target.documentElement.scrollTop + window.innerHeight) < 100) {
+            dispatch(fetchingCinemas())
+        }
+    }
 
     return (
         <section className='cinemas'>
