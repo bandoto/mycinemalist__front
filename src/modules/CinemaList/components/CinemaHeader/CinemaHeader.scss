@@ -20,6 +20,9 @@
       &:not(:last-child) {
         margin-bottom: 10px;
       }
+      span {
+        cursor: pointer;
+      }
     }
     .active {
       text-decoration: underline;

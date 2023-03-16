@@ -12,3 +12,5 @@ export interface getAllCinemasProps {
     page: number,
     tag: string
 }
+
+export type Tag = 'popular' | 'top_rated'

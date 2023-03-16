@@ -3,12 +3,13 @@ import {Container} from "../../../../UI/Container/Container";
 
 import './CinemaList.scss'
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
-import {fetchingCinemas, getAllCinemas} from "../../api/cinemas/cinemasSlice";
+import {fetchingCinemas, getAllCinemas, setTag} from "../../api/cinemas/cinemasSlice";
 import CinemaItem from "../../../../components/CinemaItem/CinemaItem";
 import CinemaHeader from "../CinemaHeader/CinemaHeader";
 import {useScroll} from "../../hooks/useScroll";
 import H1 from "../../../../UI/H1/H1";
 import Loader from "../../../../components/Loader/Loader";
+import {TOP_RATED} from "../../utils/consts";
 
 export const CinemaList = () => {
 
@@ -19,26 +20,24 @@ export const CinemaList = () => {
         if (fetching) {
             dispatch(getAllCinemas({page, tag}))
         }
-    }, [fetching])
+    }, [fetching, tag])
 
-    useScroll(() => dispatch(fetchingCinemas()))
+    const scroll = useScroll(() => dispatch(fetchingCinemas()))
 
     return (
-        <section className='cinemas'>
-            <Container>
-                <H1>{tag}</H1>
-                <div className="cinemas__body">
-                    <div className="cinemas__main">
-                        <div className="cinemas__list">
-                            {cinemas?.map(cinema => (
-                                <CinemaItem key={cinema.cinemaNumber} {...cinema} />
-                            ))}
-                        </div>
-                        {fetching && <Loader />}
+        <>
+            <H1>{tag}</H1>
+            <div className="cinemas__body">
+                <div className="cinemas__main">
+                    <div className="cinemas__list">
+                        {cinemas?.map(cinema => (
+                            <CinemaItem key={cinema.cinemaNumber} {...cinema} />
+                        ))}
                     </div>
-                    <CinemaHeader />
+                    {<Loader />}
                 </div>
-            </Container>
-        </section>
+                <CinemaHeader />
+            </div>
+        </>
     );
 };

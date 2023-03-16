@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../../../utils/axios";
-import {Cinema, getAllCinemasProps} from "../models/cinemaModels";
+import {Cinema, getAllCinemasProps, Tag} from "../models/cinemaModels";
 
 interface cinemasState {
     isLoading: boolean
@@ -8,7 +8,7 @@ interface cinemasState {
     singleCinema: Cinema | null
     fetching: boolean
     page: number
-    tag: string
+    tag: Tag
 }
 
 const initialState: cinemasState = {
@@ -56,6 +56,9 @@ export const cinemasSlice = createSlice({
         },
         setTag: (state, action) => {
             state.tag = action.payload
+            state.fetching = true
+            state.cinemas = []
+            state.page = 1
         }
     },
     extraReducers: (builder) => {
@@ -86,5 +89,5 @@ export const cinemasSlice = createSlice({
     }
 })
 
-export const {fetchingCinemas} = cinemasSlice.actions;
+export const {fetchingCinemas, setTag} = cinemasSlice.actions;
 export default cinemasSlice.reducer;

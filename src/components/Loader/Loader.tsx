@@ -1,8 +1,16 @@
 import React from 'react';
 
+import './Loader.scss'
+
 const Loader = () => {
     return (
-        <h1 style={{textAlign: 'center', margin: '20px 0', border: '1px solid red'}}>Loading</h1>
+        <div className='loader'>
+            <div className="lds-facebook">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
     );
 };
 
