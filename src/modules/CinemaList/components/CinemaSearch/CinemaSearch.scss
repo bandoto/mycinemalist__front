@@ -1,0 +1,45 @@
+.search-cinema {
+  margin-bottom: 30px;
+  position: relative;
+  &__results {
+  }
+}
+
+.results-search {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  z-index: 5;
+  max-height: 300px;
+  overflow: auto;
+  &__list {
+  }
+  &__link {
+    display: flex;
+    gap: 10px;
+    &:hover {
+      background-color: lightgray;
+    }
+  }
+  &__item {
+    img {
+      width: 100%;
+      display: block;
+    }
+    span {
+      display: block;
+    }
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+  &__info {
+
+  }
+  &__image {
+    width: 60px;
+  }
+}

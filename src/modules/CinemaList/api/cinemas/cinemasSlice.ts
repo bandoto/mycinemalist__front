@@ -1,30 +1,49 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../../../utils/axios";
-import {Cinema, getAllCinemasProps, Tag} from "../models/cinemaModels";
+import {Cinema, CinemaResponse, getAllCinemasProps, Tag} from "../../models/cinemaModels";
+import {POPULAR} from "../../utils/consts";
 
 interface cinemasState {
     isLoading: boolean
     cinemas: Cinema[]
     singleCinema: Cinema | null
+    searchCinemas: Cinema[]
     fetching: boolean
     page: number
     tag: Tag
+    totalPages: number
+    totalResults: number
 }
 
 const initialState: cinemasState = {
     isLoading: false,
     cinemas: [],
     singleCinema: null,
+    searchCinemas: [],
     fetching: true,
     page: 1,
-    tag: 'popular'
+    tag: POPULAR,
+    totalPages: 3,
+    totalResults: 54
 }
 
-export const getAllCinemas = createAsyncThunk<Cinema[], getAllCinemasProps>(
+export const getAllCinemas = createAsyncThunk<CinemaResponse<Cinema>, getAllCinemasProps>(
     'cinemas/getAllCinemas',
     async ({page, tag}) => {
         try {
             const { data } = await axios.get(`/cinemas?page=${page}&tag=${tag}`)
+            return data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
+export const getCinemaByName = createAsyncThunk<CinemaResponse<Cinema>, string>(
+    'cinemas/getCinemaByName',
+    async (cinemaName) => {
+        try {
+            const { data } = await axios.get(`/cinemas/search/${cinemaName}`)
             return data
         } catch (e) {
             console.log(e)
@@ -63,12 +82,14 @@ export const cinemasSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getAllCinemas.pending, (state) => {
+            .addCase(getAllCinemas.pending, (state, action) => {
                 state.isLoading = true
             })
             .addCase(getAllCinemas.fulfilled, (state, action) => {
+                state.totalPages = action.payload.total_pages
+                state.totalResults = action.payload.total_results
                 state.isLoading = false
-                state.cinemas = [...state.cinemas, ...action.payload]
+                state.cinemas = [...state.cinemas, ...action.payload.results]
                 state.fetching = false
                 state.page = state.page + 1
             })
@@ -84,6 +105,19 @@ export const cinemasSlice = createSlice({
                 state.singleCinema = action.payload
             })
             .addCase(getCinema.rejected, (state, action) => {
+                state.isLoading = false
+            })
+
+            .addCase(getCinemaByName.pending, (state, action) => {
+                state.isLoading = true
+            })
+            .addCase(getCinemaByName.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.searchCinemas = action.payload.results
+                state.fetching = false
+                // state.page = state.page + 1
+            })
+            .addCase(getCinemaByName.rejected, (state, action) => {
                 state.isLoading = false
             })
     }
