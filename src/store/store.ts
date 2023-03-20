@@ -5,7 +5,7 @@ import {cinemasSlice} from "../modules/CinemaList";
 export const store = configureStore({
     reducer: {
         auth: authSlice,
-        cinemas: cinemasSlice
+        cinemas: cinemasSlice,
     },
 });
 

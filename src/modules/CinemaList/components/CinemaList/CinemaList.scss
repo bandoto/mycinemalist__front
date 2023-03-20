@@ -1,21 +1,6 @@
-.cinemas {
-  padding: 50px 0;
-  &__tag {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    text-transform: uppercase;
-
-    margin-bottom: 50px;
-  }
-  &__body {
-    display: flex;
-    gap: 20px;
-  }
-  &__main {
-    flex: 1 1 auto;
-    position: relative;
-  }
+.main-cinemas {
+  flex: 1 1 auto;
+  position: relative;
   &__list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

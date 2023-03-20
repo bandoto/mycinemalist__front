@@ -1,7 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import axios from "../../../../utils/axios";
-import {Cinema, CinemaResponse, getAllCinemasProps, Tag} from "../../models/cinemaModels";
-import {POPULAR} from "../../utils/consts";
+import axios from "../../../utils/axios";
+import {Cinema, CinemaResponse, getAllCinemasProps, Tag} from "../models/cinemaModels";
+import {POPULAR} from "../utils/consts";
+import {Cinemas, errorType, getMeResponse} from "../../AuthForm/api/models/authApiModels";
 
 interface cinemasState {
     isLoading: boolean
@@ -23,8 +24,8 @@ const initialState: cinemasState = {
     fetching: true,
     page: 1,
     tag: POPULAR,
-    totalPages: 3,
-    totalResults: 54
+    totalPages: 0,
+    totalResults: 0
 }
 
 export const getAllCinemas = createAsyncThunk<CinemaResponse<Cinema>, getAllCinemasProps>(
@@ -63,6 +64,18 @@ export const getCinema = createAsyncThunk<Cinema, number>(
     }
 )
 
+export const addCinemaToFavorite = createAsyncThunk<getMeResponse, number, {rejectValue: errorType}>(
+    'cinemas/addCinemaToFavorite',
+    async (id) => {
+        try {
+            const { data } = await axios.post(`/users/movieId/${id}/add`)
+            return data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
 export const cinemasSlice = createSlice({
     name: 'cinemas',
     initialState,
@@ -82,6 +95,7 @@ export const cinemasSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // getAllCinemas
             .addCase(getAllCinemas.pending, (state, action) => {
                 state.isLoading = true
             })
@@ -96,7 +110,7 @@ export const cinemasSlice = createSlice({
             .addCase(getAllCinemas.rejected, (state, action) => {
                 state.isLoading = false
             })
-
+            // getCinema
             .addCase(getCinema.pending, (state) => {
                 state.isLoading = true
             })
@@ -107,7 +121,7 @@ export const cinemasSlice = createSlice({
             .addCase(getCinema.rejected, (state, action) => {
                 state.isLoading = false
             })
-
+            // getCinemaByName
             .addCase(getCinemaByName.pending, (state, action) => {
                 state.isLoading = true
             })
@@ -120,6 +134,7 @@ export const cinemasSlice = createSlice({
             .addCase(getCinemaByName.rejected, (state, action) => {
                 state.isLoading = false
             })
+
     }
 })
 

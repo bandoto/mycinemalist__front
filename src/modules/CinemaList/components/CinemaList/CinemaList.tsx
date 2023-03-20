@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
-import './CinemaList.scss'
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
-import {fetchingCinemas, getAllCinemas} from "../../api/cinemas/cinemasSlice";
-import CinemaItem from "../../../../components/CinemaItem/CinemaItem";
-import CinemaHeader from "../CinemaHeader/CinemaHeader";
-import H1 from "../../../../UI/H1/H1";
+import {fetchingCinemas, getAllCinemas} from "../../api/cinemasSlice";
+import CinemaItem from "../CinemaItem/CinemaItem";
 import Loader from "../../../../components/Loader/Loader";
+
+import './CinemaList.scss';
 
 export const CinemaList = () => {
 
@@ -33,19 +32,13 @@ export const CinemaList = () => {
     }
 
     return (
-        <>
-            <H1>{tag}</H1>
-            <div className="cinemas__body">
-                <div className="cinemas__main">
-                    <div className="cinemas__list">
-                        {cinemas?.map(cinema => (
-                            <CinemaItem key={cinema.cinemaNumber} {...cinema} />
-                        ))}
-                    </div>
-                    {fetching ? <Loader /> : null}
-                </div>
-                <CinemaHeader />
+        <div className="cinemas__main main-cinemas">
+            <div className="main-cinemas__list">
+                {cinemas?.map(cinema => (
+                    <CinemaItem key={cinema.cinemaNumber} {...cinema} />
+                ))}
             </div>
-        </>
+            {fetching ? <Loader /> : null}
+        </div>
     );
 };

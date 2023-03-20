@@ -1,3 +1,5 @@
-export {default as cinemasSlice} from './api/cinemas/cinemasSlice'
+export {default as cinemasSlice} from './api/cinemasSlice'
 export {CinemaList} from './components/CinemaList/CinemaList'
 export {CinemaSearch} from './components/CinemaSearch/CinemaSearch'
+export {CinemaNav} from './components/CinemaNav/CinemaNav'
+export {CinemaSingle} from './components/CinemaSingle/CinemaSingle'

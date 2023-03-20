@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
 import {useEffect} from "react";
-import {getCinema} from "../../api/cinemas/cinemasSlice";
+import {addCinemaToFavorite, getCinema} from "../../api/cinemasSlice";
 import {useParams} from "react-router-dom";
 import {Container} from "../../../../UI/Container/Container";
 import {HOST_LINK_IMAGE} from "../../../../utils/consts";
@@ -9,7 +9,7 @@ import './CinemaSingle.scss'
 import H1 from "../../../../UI/H1/H1";
 import Loader from "../../../../components/Loader/Loader";
 
-const CinemaSingle = () => {
+export const CinemaSingle = () => {
 
     const params = useParams()
     const dispatch = useAppDispatch()
@@ -18,6 +18,12 @@ const CinemaSingle = () => {
     useEffect(() => {
         dispatch(getCinema(Number(params.id)))
     }, [])
+
+    const addCinemaToFavoriteHandler = (id?: number) => {
+        if (id) {
+            dispatch(addCinemaToFavorite(id))
+        }
+    }
 
     return (
         <div className='cinema'>
@@ -39,6 +45,7 @@ const CinemaSingle = () => {
                                     <span>Оцінка - {singleCinema?.rate}</span>
                                 </div>
                             </div>
+                            <button onClick={() => addCinemaToFavoriteHandler(singleCinema?.cinemaNumber)}>Додати в мій список</button>
                             <div className="cinema__description">Опис фільму: {singleCinema?.description}</div>
                         </>
                 }
@@ -46,5 +53,3 @@ const CinemaSingle = () => {
         </div>
     );
 };
-
-export default CinemaSingle;

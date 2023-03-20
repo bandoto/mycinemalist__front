@@ -3,7 +3,7 @@ import Input from "../../../../UI/Input/Input";
 import "./CinemaSearch.scss";
 import {useDebounce} from "../../hooks/useDebounce";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
-import {getCinemaByName} from "../../api/cinemas/cinemasSlice";
+import {getCinemaByName} from "../../api/cinemasSlice";
 import {HOST_LINK_IMAGE} from "../../../../utils/consts";
 import {Link} from "react-router-dom";
 import Loader from "../../../../components/Loader/Loader";
@@ -28,7 +28,7 @@ export const CinemaSearch = () => {
     }, [debounced, searchCinemas])
 
     return (
-        <div className="cinemas__search search-cinema">
+        <div className="cinemas__search search-cinemas">
             <Input
                 type="text"
                 placeholder="Введіть назву фільму..."

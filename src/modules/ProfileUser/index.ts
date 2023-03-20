@@ -1,0 +1,1 @@
+export {ProfileTable} from './components/ProfileTable/ProfileTable'

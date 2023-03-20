@@ -25,7 +25,10 @@ const Header = () => {
                         {
                             isAuth
                                 ?
-                                <HeaderLink text='Вийти' onClick={handleLogout} />
+                                <>
+                                    <HeaderLink text='Профіль' href='/profile' />
+                                    <HeaderLink text='Вийти' onClick={handleLogout} />
+                                </>
                                 :
                                 <>
                                     <HeaderLink text="Вхід" href='/login' />

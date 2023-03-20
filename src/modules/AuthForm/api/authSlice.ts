@@ -1,21 +1,21 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import axios from "../../../../utils/axios";
-import {RootState} from "../../../../store/store";
-import {getMeResponse, KnownError, CreateUser, errorType} from '../models/authApiModels'
+import axios from "../../../utils/axios";
+import {RootState} from "../../../store/store";
+import {getMeResponse, KnownError, CreateUser, errorType, User, Cinemas} from './models/authApiModels'
 import {AxiosError} from "axios";
 
 interface authState {
-    user: {},
+    user: User | null,
     token: string,
     isLoading: boolean,
     errors: string[] | string,
 }
 
 const initialState: authState = {
-    user: {},
+    user: null,
     token: '',
     isLoading: false,
-    errors: ''
+    errors: '',
 }
 
 export const registrationUser = createAsyncThunk<getMeResponse, CreateUser, {rejectValue: errorType}>(
@@ -73,6 +73,7 @@ export const getMe = createAsyncThunk<getMeResponse, undefined, {rejectValue: er
     async (_, {rejectWithValue }) => {
         try {
             const { data } = await axios.get('/auth/me')
+            console.log('render getMe')
             return data
         } catch (err) {
             const error: AxiosError<KnownError> = err as any;
@@ -89,7 +90,7 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            state.user = {}
+            state.user = null
             state.token = ''
             state.isLoading = false
             state.errors = []

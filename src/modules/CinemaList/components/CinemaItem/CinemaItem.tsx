@@ -1,9 +1,9 @@
-import {Cinema} from "../../modules/CinemaList/models/cinemaModels";
-import {HOST_LINK_IMAGE} from "../../utils/consts";
+import {Cinema} from "../../models/cinemaModels";
+import {HOST_LINK_IMAGE} from "../../../../utils/consts";
 
 import './CinemaItem.scss'
 import {Link} from "react-router-dom";
-import {ellipsis} from "../../helpers/ellipsis";
+import {ellipsis} from "../../../../helpers/ellipsis";
 
 const CinemaItem = (cinema: Cinema)=> {
     return (

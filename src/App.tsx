@@ -1,11 +1,12 @@
 import Header from "./components/Header/Header"
 import { Routes, Route } from "react-router-dom";
 import {useAppDispatch} from "./hooks/hooks";
-import {getMe} from "./modules/AuthForm";
 import {useEffect} from "react";
 import AuthPage from "./pages/AuthPage/AuthPage";
-import CinemasPage from "./pages/CinemasPage/CinemasPage";
-import CinemaSingle from "./modules/CinemaList/components/CinemaSingle/CinemaSingle";
+import CinemaPage from "./pages/CinemasPage/CinemaPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import {CinemaSingle} from "./modules/CinemaList";
+import {getMe} from "./modules/AuthForm";
 
 const App = () => {
 
@@ -20,10 +21,11 @@ const App = () => {
             <Header />
             <main className='main'>
                 <Routes>
-                    <Route path='/' element={<CinemasPage />}></Route>
+                    <Route path='/' element={<CinemaPage />}></Route>
                     <Route path='/login' element={<AuthPage />}></Route>
                     <Route path='/registration' element={<AuthPage />}></Route>
                     <Route path='/cinema/:id' element={<CinemaSingle />}></Route>
+                    <Route path='/profile' element={<ProfilePage />}></Route>
                 </Routes>
             </main>
         </div>

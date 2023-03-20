@@ -3,7 +3,7 @@ import {Container} from "../../../../UI/Container/Container";
 import LoginInput from "../LoginInput/LoginInput";
 import LoginButton from "../LoginButton/LoginButton";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
-import {checkIsAuth, loginUser, registrationUser} from "../../api/auth/authSlice";
+import {checkIsAuth, loginUser, registrationUser} from "../../api/authSlice";
 import {useLocation, useNavigate} from "react-router-dom";
 import {LOGIN_ROUTE, MAIN_PAGE_ROUTE} from "../../../../utils/consts";
 import {LoginFormRequest, RegistrationFormRequest} from "../../models/authModels";
