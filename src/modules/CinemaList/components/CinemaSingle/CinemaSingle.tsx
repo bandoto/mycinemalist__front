@@ -1,6 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
-import {useEffect} from "react";
-import {addCinemaToFavorite, getCinema} from "../../api/cinemasSlice";
+import {useEffect, useState} from "react";
+import {getCinema} from "../../api/cinemasSlice";
 import {useParams} from "react-router-dom";
 import {Container} from "../../../../UI/Container/Container";
 import {HOST_LINK_IMAGE} from "../../../../utils/consts";
@@ -8,20 +8,45 @@ import {HOST_LINK_IMAGE} from "../../../../utils/consts";
 import './CinemaSingle.scss'
 import H1 from "../../../../UI/H1/H1";
 import Loader from "../../../../components/Loader/Loader";
+import Button from "../../../../UI/Button/Button";
+import {addCinemaToFavorite, deleteCinemaFromFavorite, getMe} from "../../../AuthForm/api/authSlice";
 
 export const CinemaSingle = () => {
 
     const params = useParams()
     const dispatch = useAppDispatch()
     const {singleCinema, isLoading} = useAppSelector(state => state.cinemas)
+    const {user, isLoading: authLoading} = useAppSelector(state => state.auth)
+
+    const [fav, setFav] = useState(false)
 
     useEffect(() => {
         dispatch(getCinema(Number(params.id)))
     }, [])
 
+    useEffect(() => {
+        checkFavoriteCinema(singleCinema?.cinemaNumber)
+    }, [singleCinema])
+
+    const checkFavoriteCinema = (id?: number) => {
+        if (user?.cinemas.some(cinema => cinema.cinemaNumber === id)) {
+            setFav(true)
+        } else {
+            setFav(false)
+        }
+    }
+
     const addCinemaToFavoriteHandler = (id?: number) => {
         if (id) {
             dispatch(addCinemaToFavorite(id))
+            setFav(true)
+        }
+    }
+
+    const deleteCinemaFromFavoriteHandler = (id?: number) => {
+        if (id) {
+            dispatch(deleteCinemaFromFavorite(id))
+            setFav(false)
         }
     }
 
@@ -45,7 +70,18 @@ export const CinemaSingle = () => {
                                     <span>Оцінка - {singleCinema?.rate}</span>
                                 </div>
                             </div>
-                            <button onClick={() => addCinemaToFavoriteHandler(singleCinema?.cinemaNumber)}>Додати в мій список</button>
+                            {
+                                authLoading
+                                    ?
+                                    <Loader />
+                                    :
+                                    fav
+                                        ?
+                                    <Button danger={true} onClick={() => deleteCinemaFromFavoriteHandler(singleCinema?.cinemaNumber)}>Прибрати з списку</Button>
+                                        :
+                                    <Button primary={true} onClick={() => addCinemaToFavoriteHandler(singleCinema?.cinemaNumber)}>Додати в мій список</Button>
+
+                            }
                             <div className="cinema__description">Опис фільму: {singleCinema?.description}</div>
                         </>
                 }

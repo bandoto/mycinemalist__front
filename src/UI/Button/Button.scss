@@ -1,0 +1,21 @@
+.main-button {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #000;
+  cursor: pointer;
+  color: #fff;
+  &:disabled {
+    background-color: #fff;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.danger-btn {
+  background-color: red;
+}
+
+.primary-btn {
+  background-color: lightblue;
+}

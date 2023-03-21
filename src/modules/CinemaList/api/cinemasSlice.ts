@@ -64,17 +64,29 @@ export const getCinema = createAsyncThunk<Cinema, number>(
     }
 )
 
-export const addCinemaToFavorite = createAsyncThunk<getMeResponse, number, {rejectValue: errorType}>(
-    'cinemas/addCinemaToFavorite',
-    async (id) => {
-        try {
-            const { data } = await axios.post(`/users/movieId/${id}/add`)
-            return data
-        } catch (e) {
-            console.log(e)
-        }
-    }
-)
+// export const addCinemaToFavorite = createAsyncThunk<getMeResponse, number, {rejectValue: errorType}>(
+//     'cinemas/addCinemaToFavorite',
+//     async (id) => {
+//         try {
+//             const { data } = await axios.post(`/users/movieId/${id}/add`)
+//             return data
+//         } catch (e) {
+//             console.log(e)
+//         }
+//     }
+// )
+//
+// export const deleteCinemaFromFavorite = createAsyncThunk<getMeResponse, number, {rejectValue: errorType}>(
+//     'cinemas/deleteCinemaToFavorite',
+//     async (id) => {
+//         try {
+//             const { data } = await axios.delete(`/users/movieId/${id}/delete`)
+//             return data
+//         } catch (e) {
+//             console.log(e)
+//         }
+//     }
+// )
 
 export const cinemasSlice = createSlice({
     name: 'cinemas',

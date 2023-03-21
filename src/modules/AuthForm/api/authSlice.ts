@@ -73,7 +73,6 @@ export const getMe = createAsyncThunk<getMeResponse, undefined, {rejectValue: er
     async (_, {rejectWithValue }) => {
         try {
             const { data } = await axios.get('/auth/me')
-            console.log('render getMe')
             return data
         } catch (err) {
             const error: AxiosError<KnownError> = err as any;
@@ -81,6 +80,30 @@ export const getMe = createAsyncThunk<getMeResponse, undefined, {rejectValue: er
                 throw err;
             }
             return rejectWithValue(error.response.data);
+        }
+    }
+)
+
+export const addCinemaToFavorite = createAsyncThunk<User, number, {rejectValue: errorType}>(
+    'auth/addCinemaToFavorite',
+    async (id) => {
+        try {
+            const { data } = await axios.post(`/users/movieId/${id}/add`)
+            return data
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
+export const deleteCinemaFromFavorite = createAsyncThunk<User, number, {rejectValue: errorType}>(
+    'auth/deleteCinemaFromFavorite',
+    async (id) => {
+        try {
+            const { data } = await axios.delete(`/users/movieId/${id}/delete`)
+            return data
+        } catch (e) {
+            console.log(e)
         }
     }
 )
@@ -94,6 +117,12 @@ export const authSlice = createSlice({
             state.token = ''
             state.isLoading = false
             state.errors = []
+        },
+        addToFavorite: (state, action) => {
+
+        },
+        deleteFromFavorite: (state, action) => {
+
         }
     },
     extraReducers: (builder) => {
@@ -141,6 +170,26 @@ export const authSlice = createSlice({
                 state.errors = action.payload?.message!
                 state.isLoading = false
             })
+            // // addCinemaToFavorite
+            // .addCase(addCinemaToFavorite.pending, (state) => {
+            //     state.isLoading = true
+            // })
+            // .addCase(addCinemaToFavorite.fulfilled, (state, action) => {
+            //     state.isLoading = false
+            // })
+            // .addCase(addCinemaToFavorite.rejected, (state, action) => {
+            //     state.isLoading = false
+            // })
+            // // deleteCinemaFromFavorite
+            // .addCase(deleteCinemaFromFavorite.pending, (state) => {
+            //     state.isLoading = true
+            // })
+            // .addCase(deleteCinemaFromFavorite.fulfilled, (state, action) => {
+            //     state.isLoading = false
+            // })
+            // .addCase(deleteCinemaFromFavorite.rejected, (state, action) => {
+            //     state.isLoading = false
+            // })
     }
 })
 
