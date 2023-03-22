@@ -6,7 +6,7 @@ import AuthPage from "./pages/AuthPage/AuthPage";
 import CinemaPage from "./pages/CinemasPage/CinemaPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import {CinemaSingle} from "./modules/CinemaList";
-import {getMe} from "./modules/AuthForm";
+import {getMe} from "./modules/UserService";
 
 const App = () => {
 

@@ -16,7 +16,7 @@ export const CinemaSearch = () => {
 
     const {searchCinemas, isLoading} = useAppSelector(state => state.cinemas)
     const dispatch = useAppDispatch()
-
+    //
     useEffect(() => {
         if (debounced.length > 3) {
             dispatch(getCinemaByName(search))

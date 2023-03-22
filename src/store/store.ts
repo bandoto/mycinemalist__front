@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {authSlice} from "../modules/AuthForm";
+import {authSlice} from "../modules/UserService";
 import {cinemasSlice} from "../modules/CinemaList";
 
 export const store = configureStore({

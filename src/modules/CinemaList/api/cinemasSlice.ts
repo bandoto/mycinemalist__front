@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../../utils/axios";
 import {Cinema, CinemaResponse, getAllCinemasProps, Tag} from "../models/cinemaModels";
 import {POPULAR} from "../utils/consts";
-import {Cinemas, errorType, getMeResponse} from "../../AuthForm/api/models/authApiModels";
+import {Cinemas, errorType, getMeResponse} from "../../UserService/api/models/authApiModels";
 
 interface cinemasState {
     isLoading: boolean
@@ -63,30 +63,6 @@ export const getCinema = createAsyncThunk<Cinema, number>(
         }
     }
 )
-
-// export const addCinemaToFavorite = createAsyncThunk<getMeResponse, number, {rejectValue: errorType}>(
-//     'cinemas/addCinemaToFavorite',
-//     async (id) => {
-//         try {
-//             const { data } = await axios.post(`/users/movieId/${id}/add`)
-//             return data
-//         } catch (e) {
-//             console.log(e)
-//         }
-//     }
-// )
-//
-// export const deleteCinemaFromFavorite = createAsyncThunk<getMeResponse, number, {rejectValue: errorType}>(
-//     'cinemas/deleteCinemaToFavorite',
-//     async (id) => {
-//         try {
-//             const { data } = await axios.delete(`/users/movieId/${id}/delete`)
-//             return data
-//         } catch (e) {
-//             console.log(e)
-//         }
-//     }
-// )
 
 export const cinemasSlice = createSlice({
     name: 'cinemas',

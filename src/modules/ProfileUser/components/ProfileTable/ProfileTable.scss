@@ -1,0 +1,27 @@
+.profile {
+  &__fav {
+  }
+
+  &__list {
+  }
+
+  &__link {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 5px;
+    a {
+      flex: 1 1 auto;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &:nth-child(odd) {
+      background-color: lightgray;
+    }
+    &:nth-child(even) {
+      background-color: lightblue;
+    }
+
+  }
+}

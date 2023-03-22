@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../../utils/axios";
 import {RootState} from "../../../store/store";
-import {getMeResponse, KnownError, CreateUser, errorType, User, Cinemas} from './models/authApiModels'
+import {getMeResponse, KnownError, CreateUser, errorType, User} from './models/authApiModels'
 import {AxiosError} from "axios";
 
 interface authState {
@@ -117,12 +117,6 @@ export const authSlice = createSlice({
             state.token = ''
             state.isLoading = false
             state.errors = []
-        },
-        addToFavorite: (state, action) => {
-
-        },
-        deleteFromFavorite: (state, action) => {
-
         }
     },
     extraReducers: (builder) => {
@@ -170,26 +164,6 @@ export const authSlice = createSlice({
                 state.errors = action.payload?.message!
                 state.isLoading = false
             })
-            // // addCinemaToFavorite
-            // .addCase(addCinemaToFavorite.pending, (state) => {
-            //     state.isLoading = true
-            // })
-            // .addCase(addCinemaToFavorite.fulfilled, (state, action) => {
-            //     state.isLoading = false
-            // })
-            // .addCase(addCinemaToFavorite.rejected, (state, action) => {
-            //     state.isLoading = false
-            // })
-            // // deleteCinemaFromFavorite
-            // .addCase(deleteCinemaFromFavorite.pending, (state) => {
-            //     state.isLoading = true
-            // })
-            // .addCase(deleteCinemaFromFavorite.fulfilled, (state, action) => {
-            //     state.isLoading = false
-            // })
-            // .addCase(deleteCinemaFromFavorite.rejected, (state, action) => {
-            //     state.isLoading = false
-            // })
     }
 })
 

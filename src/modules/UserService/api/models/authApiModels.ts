@@ -29,6 +29,9 @@ export interface Cinemas {
     id: number,
     cinemaNumber: number,
     name: string,
+    date: string,
+    image: string,
+    rate: number,
     UserCinemas: UserCinema
 }
 

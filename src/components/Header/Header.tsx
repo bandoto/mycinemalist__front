@@ -3,7 +3,8 @@ import {Container} from "../../UI/Container/Container";
 
 import './Header.scss'
 import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
-import {checkIsAuth, logout} from "../../modules/AuthForm";
+import {checkIsAuth, logout} from "../../modules/UserService";
+import {LOGIN_ROUTE, MAIN_PAGE_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE} from "../../utils/consts";
 
 const Header = () => {
 
@@ -22,17 +23,18 @@ const Header = () => {
                 <div className="header__logo"></div>
                 <nav className="header__menu">
                     <ul className="header__list">
+                        <HeaderLink text='Головна' href={MAIN_PAGE_ROUTE} />
                         {
                             isAuth
                                 ?
                                 <>
-                                    <HeaderLink text='Профіль' href='/profile' />
+                                    <HeaderLink text='Профіль' href={PROFILE_ROUTE} />
                                     <HeaderLink text='Вийти' onClick={handleLogout} />
                                 </>
                                 :
                                 <>
-                                    <HeaderLink text="Вхід" href='/login' />
-                                    <HeaderLink text="Регістрація" href='/registration' />
+                                    <HeaderLink text="Вхід" href={LOGIN_ROUTE} />
+                                    <HeaderLink text="Регістрація" href={REGISTRATION_ROUTE} />
                                 </>
                         }
                     </ul>

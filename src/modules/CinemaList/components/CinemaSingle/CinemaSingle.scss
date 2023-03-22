@@ -14,8 +14,13 @@
       object-fit: cover;
     }
   }
+  &__about {
 
+  }
   &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-left: 20px;
     span {
       display: block;
