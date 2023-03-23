@@ -1,12 +1,13 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Input from "../../../../UI/Input/Input";
-import "./CinemaSearch.scss";
 import {useDebounce} from "../../hooks/useDebounce";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
 import {getCinemaByName} from "../../api/cinemasSlice";
 import {HOST_LINK_IMAGE} from "../../../../utils/consts";
 import {Link} from "react-router-dom";
 import Loader from "../../../../components/Loader/Loader";
+
+import "./CinemaSearch.scss";
 
 export const CinemaSearch = () => {
 

@@ -1,4 +1,4 @@
-import React, {FC, FormEvent, useEffect, useState} from 'react';
+import React, {FormEvent, useEffect, useState} from 'react';
 import {Container} from "../../../../UI/Container/Container";
 import LoginInput from "../LoginInput/LoginInput";
 import LoginButton from "../LoginButton/LoginButton";

@@ -1,9 +1,9 @@
-import React from "react";
-import "./CinemaNav.scss";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/hooks";
 import {NOW_PLAYING, POPULAR, TOP_RATED, UPCOMING} from "../../utils/consts";
 import {setTag} from "../../api/cinemasSlice";
 import {Tag} from "../../models/cinemaModels";
+
+import "./CinemaNav.scss";
 
 export const CinemaNav = () => {
     const dispatch = useAppDispatch();

@@ -4,11 +4,12 @@ import {getCinema} from "../../api/cinemasSlice";
 import {useParams} from "react-router-dom";
 import {Container} from "../../../../UI/Container/Container";
 import {HOST_LINK_IMAGE} from "../../../../utils/consts";
-import './CinemaSingle.scss'
 import H1 from "../../../../UI/H1/H1";
 import Loader from "../../../../components/Loader/Loader";
 import Button from "../../../../UI/Button/Button";
 import {addCinemaToFavorite, checkIsAuth, deleteCinemaFromFavorite} from "../../../UserService";
+
+import './CinemaSingle.scss'
 
 export const CinemaSingle = () => {
 

@@ -2,7 +2,6 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "../../../utils/axios";
 import {Cinema, CinemaResponse, getAllCinemasProps, Tag} from "../models/cinemaModels";
 import {POPULAR} from "../utils/consts";
-import {Cinemas, errorType, getMeResponse} from "../../UserService/api/models/authApiModels";
 
 interface cinemasState {
     isLoading: boolean

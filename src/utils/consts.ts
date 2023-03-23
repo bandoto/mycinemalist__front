@@ -1,4 +1,4 @@
-export const HOST_LINK = 'http://localhost:5000'
+export const HOST_LINK = 'https://mycinemalistback-production.up.railway.app'
 export const HOST_LINK_IMAGE = 'https://image.tmdb.org/t/p/w500'
 export const MAIN_PAGE_ROUTE = '/'
 export const LOGIN_ROUTE = '/login'
